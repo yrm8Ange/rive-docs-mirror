@@ -1,29 +1,60 @@
-name: Deploy Rive Docs
+name: Sync and Build Rive Docs
 
 on:
   schedule:
     - cron: '0 0 * * 0'
   workflow_dispatch:
+  push:
+    branches: [main]
 
 permissions:
+  contents: write  # Changed from 'read' so the bot can push the sync changes
   pages: write
   id-token: write
 
 jobs:
-  deploy:
+  sync-and-build:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-      - name: Clone Rive docs
-        run: git clone https://github.com/rive-app/rive-docs.git docs-source
+      - name: Checkout forked repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches all history so merging works smoothly
+
+      - name: Sync with upstream
+        run: |
+          git remote add upstream https://github.com/rive-app/rive-docs.git || true
+          git fetch upstream main
+          git config user.email "bot@github.com"
+          git config user.name "Sync Bot"
+          
+          # Merge changes
+          git merge upstream/main --allow-unrelated-histories -m "Sync upstream" || echo "No changes or conflict handled"
+          
+          # Push the changes back to YOUR fork
+          git push origin main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-size: 20
+
+      - name: Install Mintlify
+        run: npm install -g mintlify
+
+      - name: Build docs
+        run: mintlify export
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'docs-source'
+          # Mintlify export typically outputs to 'out'. 
+          # Change this to '.mintlify/output' if you use newer Mintlify versions.
+          path: 'out' 
 
       - name: Deploy to GitHub Pages
         id: deployment
