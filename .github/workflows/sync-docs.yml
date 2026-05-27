@@ -1,12 +1,14 @@
-name: Sync Rive Docs Weekly
+name: Sync and Build Rive Docs
 
 on:
   schedule:
     - cron: '0 0 * * 0'  # Every Sunday at midnight UTC
-  workflow_dispatch:     # Allows manual trigger in GitHub UI
+  workflow_dispatch:     # Manual trigger
+  push:
+    branches: [main]
 
 jobs:
-  sync:
+  sync-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout forked repo
@@ -14,18 +16,22 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Add upstream remote
-        run: git remote add upstream https://github.com/rive-app/rive-docs.git
-
-      - name: Fetch from upstream
-        run: git fetch upstream main
-
-      - name: Merge latest changes
+      - name: Add upstream remote and sync
         run: |
+          git remote add upstream https://github.com/rive-app/rive-docs.git || true
+          git fetch upstream main
           git config user.email "github-actions@github.com"
           git config user.name "GitHub Actions"
-          git merge upstream/main --allow-unrelated-histories || git merge upstream/main
+          git merge upstream/main -m "Sync with upstream" --allow-unrelated-histories || git merge upstream/main -m "Sync with upstream" || echo "Already up to date"
 
-      - name: Push to your fork
-        run: git push origin main
-        continue-on-error: true
+      - name: Install Mintlify
+        run: npm install -g mintlify
+
+      - name: Build docs
+        run: mintlify build -o dist
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
