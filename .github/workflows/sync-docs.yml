@@ -1,37 +1,29 @@
-name: Build and Deploy Rive Docs
+name: Deploy Rive Docs
 
 on:
   schedule:
-    - cron: '0 0 * * 0'  # Sunday midnight
+    - cron: '0 0 * * 0'
   workflow_dispatch:
-  push:
-    branches: [main]
 
 permissions:
   pages: write
   id-token: write
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-      - name: Clone Rive docs upstream
-        run: git clone https://github.com/rive-app/rive-docs.git .
-
-      - name: Install Mintlify
-        run: npm install -g mintlify
-
-      - name: Build docs
-        run: mintlify export
+      - name: Clone Rive docs
+        run: git clone https://github.com/rive-app/rive-docs.git docs-source
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'out'
+          path: 'docs-source'
 
       - name: Deploy to GitHub Pages
         id: deployment
