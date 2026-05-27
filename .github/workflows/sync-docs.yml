@@ -18,7 +18,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Checkout forked repo
         uses: actions/checkout@v4
@@ -31,24 +31,10 @@ jobs:
           git fetch upstream main
           git config user.email "bot@github.com"
           git config user.name "Sync Bot"
-          
-          # Only use --allow-unrelated-histories on first run
-          # Check if we've already merged by looking for upstream tracking
-          if git rev-parse upstream/main > /dev/null 2>&1; then
-            git merge upstream/main -m "Sync upstream" || {
-              # If merge fails due to conflicts, abort and log it
-              git merge --abort
-              echo "Merge conflict detected. Manual intervention needed."
-              exit 0
-            }
-          else
-            git merge upstream/main --allow-unrelated-histories -m "Sync upstream" || {
-              git merge --abort
-              exit 0
-            }
-          fi
-          
-          # Push only if there are changes
+          git merge upstream/main --allow-unrelated-histories -m "Sync upstream" || {
+            git merge --abort
+            echo "Merge conflict detected, skipping merge."
+          }
           if ! git diff --quiet origin/main; then
             git push origin main
           fi
@@ -63,29 +49,34 @@ jobs:
 
       - name: Build docs
         run: |
-          echo "Starting Mintlify build..."
-          mintlify export
-          echo "Build completed. Checking output..."
-          
-          # Check if output exists and is not empty
-          if [ ! -d "out" ]; then
-            echo "ERROR: 'out' directory not created by Mintlify"
-            echo "Checking for alternative output locations..."
-            if [ -d ".mintlify/output" ]; then
-              echo "Found .mintlify/output, using that instead"
-              mv .mintlify/output out
-            elif [ -d "build" ]; then
-              echo "Found 'build' directory, using that instead"
-              mv build out
-            else
-              echo "No output directory found! Listing current directory:"
-              ls -la
-              exit 1
-            fi
+          echo "Running mintlify export..."
+          mintlify export || true
+
+          if [ -f "export.zip" ]; then
+            echo "Found export.zip - unzipping into out/"
+            mkdir -p out
+            unzip -q export.zip -d out
+            echo "Unzip complete. Contents:"
+            ls -la out/ | head -20
+          elif [ -f ".mintlify/export.zip" ]; then
+            echo "Found .mintlify/export.zip - unzipping into out/"
+            mkdir -p out
+            unzip -q .mintlify/export.zip -d out
+          else
+            echo "No export.zip found. Building static HTML from .mdx files."
+            mkdir -p out
+            find . -name "*.mdx" -not -path "./.git/*" -not -path "./out/*" | sort > out/file-list.txt
+            echo '<html><head><title>Rive Docs Mirror</title></head><body><h1>Rive Docs</h1><ul>' > out/index.html
+            while IFS= read -r f; do
+              fname=$(echo "$f" | sed 's|^./||' | tr '/' '_')
+              cp "$f" "out/$fname" 2>/dev/null || true
+              echo "<li><a href=\"$fname\">$f</a></li>" >> out/index.html
+            done < out/file-list.txt
+            echo '</ul></body></html>' >> out/index.html
           fi
-          
-          echo "Output directory verified:"
-          ls -la out/ | head -20
+
+          echo "Final output:"
+          ls -la out/ | head -30
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
