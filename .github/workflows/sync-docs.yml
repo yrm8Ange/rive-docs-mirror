@@ -28,7 +28,7 @@ jobs:
         run: npm install -g mintlify
 
       - name: Build docs
-        run: mintlify build -o dist
+        run: mintlify export
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
