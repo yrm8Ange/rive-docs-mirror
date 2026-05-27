@@ -1,0 +1,31 @@
+name: Sync Rive Docs Weekly
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # Every Sunday at midnight UTC
+  workflow_dispatch:     # Allows manual trigger in GitHub UI
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout forked repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Add upstream remote
+        run: git remote add upstream https://github.com/rive-app/rive-docs.git
+
+      - name: Fetch from upstream
+        run: git fetch upstream main
+
+      - name: Merge latest changes
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+          git merge upstream/main --allow-unrelated-histories || git merge upstream/main
+
+      - name: Push to your fork
+        run: git push origin main
+        continue-on-error: true
