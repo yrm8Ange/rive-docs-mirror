@@ -1,35 +1,26 @@
-name: Sync and Build Rive Docs
+name: Build and Deploy Rive Docs
 
 on:
   schedule:
-    - cron: '0 0 * * 0'
+    - cron: '0 0 * * 0'  # Sunday midnight
   workflow_dispatch:
   push:
     branches: [main]
 
 permissions:
-  contents: read
   pages: write
   id-token: write
 
 jobs:
-  sync-and-build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
-      - name: Checkout forked repo
-        uses: actions/checkout@v4
-
-      - name: Sync with upstream
-        run: |
-          git remote add upstream https://github.com/rive-app/rive-docs.git || true
-          git fetch upstream main
-          git config user.email "bot@github.com"
-          git config user.name "Sync Bot"
-          git merge upstream/main --allow-unrelated-histories -m "Sync" || git merge upstream/main -m "Sync" || echo "Already synced"
+      - name: Clone Rive docs upstream
+        run: git clone https://github.com/rive-app/rive-docs.git .
 
       - name: Install Mintlify
         run: npm install -g mintlify
@@ -40,7 +31,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'site'
+          path: 'out'
 
       - name: Deploy to GitHub Pages
         id: deployment
