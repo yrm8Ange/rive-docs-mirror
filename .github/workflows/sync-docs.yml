@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: write  # Changed from 'read' so the bot can push the sync changes
+  contents: write
   pages: write
   id-token: write
 
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout forked repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches all history so merging works smoothly
+          fetch-depth: 0
 
       - name: Sync with upstream
         run: |
@@ -32,11 +32,26 @@ jobs:
           git config user.email "bot@github.com"
           git config user.name "Sync Bot"
           
-          # Merge changes
-          git merge upstream/main --allow-unrelated-histories -m "Sync upstream" || echo "No changes or conflict handled"
+          # Only use --allow-unrelated-histories on first run
+          # Check if we've already merged by looking for upstream tracking
+          if git rev-parse upstream/main > /dev/null 2>&1; then
+            git merge upstream/main -m "Sync upstream" || {
+              # If merge fails due to conflicts, abort and log it
+              git merge --abort
+              echo "Merge conflict detected. Manual intervention needed."
+              exit 0
+            }
+          else
+            git merge upstream/main --allow-unrelated-histories -m "Sync upstream" || {
+              git merge --abort
+              exit 0
+            }
+          fi
           
-          # Push the changes back to YOUR fork
-          git push origin main
+          # Push only if there are changes
+          if ! git diff --quiet origin/main; then
+            git push origin main
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -47,14 +62,35 @@ jobs:
         run: npm install -g mintlify
 
       - name: Build docs
-        run: mintlify export
+        run: |
+          echo "Starting Mintlify build..."
+          mintlify export
+          echo "Build completed. Checking output..."
+          
+          # Check if output exists and is not empty
+          if [ ! -d "out" ]; then
+            echo "ERROR: 'out' directory not created by Mintlify"
+            echo "Checking for alternative output locations..."
+            if [ -d ".mintlify/output" ]; then
+              echo "Found .mintlify/output, using that instead"
+              mv .mintlify/output out
+            elif [ -d "build" ]; then
+              echo "Found 'build' directory, using that instead"
+              mv build out
+            else
+              echo "No output directory found! Listing current directory:"
+              ls -la
+              exit 1
+            fi
+          fi
+          
+          echo "Output directory verified:"
+          ls -la out/ | head -20
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Mintlify export typically outputs to 'out'. 
-          # Change this to '.mintlify/output' if you use newer Mintlify versions.
-          path: 'out' 
+          path: 'out'
 
       - name: Deploy to GitHub Pages
         id: deployment
