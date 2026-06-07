@@ -196,18 +196,21 @@
                 "group": "Data",
                 "pages": [
                   "editor/data-binding/overview",
-                  {
-                    "group": "Property Types",
-                    "pages": [
-                      "editor/data-binding/property-types",
-                      "editor/data-binding/enums",
-                      "editor/data-binding/lists"
-                    ]
-                  },
-                  "editor/data-binding/converters",
+                  "editor/data-binding/view-models",
+                  "editor/data-binding/property-types",
+                  "editor/data-binding/binding-data",
                   "editor/data-binding/controlling-data",
-                  "editor/data-binding/property-groups",
-                  "editor/data-binding/migration-guide"
+                   {
+                    "group": "Advanced Data Binding",
+                    "pages": [
+                      "editor/data-binding/enums",
+                      "editor/data-binding/lists",
+                      "editor/data-binding/converters",
+                      "editor/data-binding/stateful-components",
+                      "editor/data-binding/property-groups",
+                      "editor/data-binding/migration-guide"
+                    ]
+                  }
                 ]
               },
               {
@@ -367,6 +370,7 @@
                   "scripting/api-reference/gpu/blend-op",
                   "scripting/api-reference/gpu/blend-state",
                   "scripting/api-reference/gpu/buffer-usage",
+                  "scripting/api-reference/gpu/buffer-usage-arg",
                   "scripting/api-reference/gpu/canvas",
                   "scripting/api-reference/gpu/color-attachment",
                   "scripting/api-reference/gpu/color-target",
@@ -377,6 +381,7 @@
                   "scripting/api-reference/gpu/filter",
                   "scripting/api-reference/gpu/gpu-bind-group",
                   "scripting/api-reference/gpu/gpu-bind-group-layout",
+                  "scripting/api-reference/gpu/gpu-buffer-desc",
                   "scripting/api-reference/gpu/gpu-buffer",
                   "scripting/api-reference/gpu/gpu-canvas",
                   "scripting/api-reference/gpu/gpu-color",
@@ -386,6 +391,7 @@
                   "scripting/api-reference/gpu/gpu-sampler",
                   "scripting/api-reference/gpu/gpu-texture",
                   "scripting/api-reference/gpu/load-op",
+                  "scripting/api-reference/gpu/pipeline-stage",
                   "scripting/api-reference/gpu/primitive-topology",
                   "scripting/api-reference/gpu/render-pass-desc",
                   "scripting/api-reference/gpu/sampler-entry",
@@ -742,6 +748,21 @@
                   "game-runtimes/unreal/using-triggers",
                   "game-runtimes/unreal/runtime-asset-swapping",
                   "game-runtimes/unreal/in-world-textures"
+                ]
+              },
+              {
+                "group": "C++",
+                "pages": [
+                  "runtimes/cpp/overview",
+                  "runtimes/cpp/getting-started",
+                  "runtimes/cpp/file-and-artboard",
+                  "runtimes/cpp/state-machines",
+                  "runtimes/cpp/data-binding",
+                  "runtimes/cpp/asset-loading",
+                  "runtimes/cpp/rendering-loop",
+                  "runtimes/cpp/command-queue",
+                  "runtimes/cpp/renderers",
+                  "runtimes/cpp/external-renderer"
                 ]
               },
               "game-runtimes/defold",
@@ -1158,8 +1179,12 @@
       "destination": "/"
     },
     {
-      "source": "/scripting/api-reference/vec2d/vector)",
+      "source": "/scripting/api-reference/vec2d/vector",
       "destination": "/scripting/api-reference/vector/vector"
+    },
+    {
+      "source": "/editor/data-binding/view-model-properties",
+      "destination": "/editor/data-binding/property-types"
     }
   ],
   "integrations": {
