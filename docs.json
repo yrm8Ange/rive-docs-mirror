@@ -25,52 +25,15 @@
             "group": " ",
             "pages": [
               "getting-started/introduction",
-              "getting-started/best-practices"
+              "account-admin/pricing"
             ]
           },
           {
             "group": "Community",
             "pages": [
               "community/community-overview",
-              "community/marketplace-overview",
+              "community/marketplace",
               "community/rive-experts"
-            ]
-          },
-          {
-            "group": "Account Admin",
-            "pages": [
-              {
-                "group": "Account Overview",
-                "pages": [
-                  "account-admin/account-overview/creating-an-account",
-                  "account-admin/account-overview/trouble-logging-in",
-                  "account-admin/account-overview/account-management",
-                  "home/account-admin/account-overview/change-your-email-or-password",
-                  "account-admin/account-overview/billing-changes",
-                  "account-admin/account-overview/downloading-my-receipt-or-invoice",
-                  "home/account-admin/account-overview/add-vat-tax-id-to-your-invoice",
-                  "home/account-admin/account-overview/refunds",
-                  "account-admin/account-overview/cancel-my-account",
-                  "home/account-admin/account-overview/cancel-a-former-employees-subscription",
-                  "account-admin/account-overview/delete-my-account"
-                ]
-              },
-              {
-                "group": "Workspaces",
-                "pages": [
-                  "account-admin/workspaces/workspaces-overview",
-                  "account-admin/workspaces/creating-a-workspace",
-                  "account-admin/workspaces/inviting-workspace-members",
-                  "account-admin/workspaces/removing-workspace-members",
-                  "home/account-admin/workspaces/workspace-status",
-                  "account-admin/workspaces/reactivating-a-canceled-workspace",
-                  "home/account-admin/workspaces/delete-a-workspace",
-                  "home/account-admin/workspaces/transfer-workspace-ownership",
-                  "account-admin/workspaces/workspace-faqs"
-                ]
-              },
-              "account-admin/pricing",
-              "account-admin/bring-your-own-bucket"
             ]
           }
         ]
@@ -200,7 +163,7 @@
                   "editor/data-binding/property-types",
                   "editor/data-binding/binding-data",
                   "editor/data-binding/controlling-data",
-                   {
+                  {
                     "group": "Advanced Data Binding",
                     "pages": [
                       "editor/data-binding/enums",
@@ -227,6 +190,17 @@
           {
             "group": "Advanced Topics",
             "pages": [
+              "getting-started/best-practices",
+              {
+                "group": "Workspaces",
+                "pages": [
+                  "account-admin/workspaces/workspaces-overview",
+                  "account-admin/workspaces/creating-a-workspace",
+                  "account-admin/workspaces/inviting-workspace-members",
+                  "account-admin/workspaces/removing-workspace-members",
+                  "home/account-admin/workspaces/workspace-status"
+                ]
+              },
               {
                 "group": "Rigging & Control",
                 "pages": [
@@ -258,7 +232,14 @@
                   "editor/accessibility/semantics"
                 ]
               },
-              "editor/ai-agent/ai-agent",
+              "account-admin/bring-your-own-bucket",
+              {
+                "group": "AI",
+                "pages": [
+                  "editor/ai-agent/ai-agent",
+                  "editor/ai/mcp"
+                ]
+              },
               {
                 "group": "Legacy Features",
                 "pages": [
@@ -381,8 +362,8 @@
                   "scripting/api-reference/gpu/filter",
                   "scripting/api-reference/gpu/gpu-bind-group",
                   "scripting/api-reference/gpu/gpu-bind-group-layout",
-                  "scripting/api-reference/gpu/gpu-buffer-desc",
                   "scripting/api-reference/gpu/gpu-buffer",
+                  "scripting/api-reference/gpu/gpu-buffer-desc",
                   "scripting/api-reference/gpu/gpu-canvas",
                   "scripting/api-reference/gpu/gpu-color",
                   "scripting/api-reference/gpu/gpu-features",
@@ -782,6 +763,54 @@
             "pages": [
               "integrations/overview",
               "integrations/html-embed"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "  ",
+        "groups": [
+          {
+            "group": " ",
+            "pages": [
+              "/tutorials/learn-rive",
+              "community/marketplace-overview"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": " ",
+        "groups": [
+          {
+            "group": " ",
+            "pages": [
+              "community/support",
+              {
+                "group": "Accounts & Billing",
+                "pages": [
+                  "account-admin/account-overview/creating-an-account",
+                  "account-admin/account-overview/trouble-logging-in",
+                  "account-admin/account-overview/account-management",
+                  "home/account-admin/account-overview/change-your-email-or-password",
+                  "account-admin/account-overview/billing-changes",
+                  "account-admin/account-overview/downloading-my-receipt-or-invoice",
+                  "home/account-admin/account-overview/add-vat-tax-id-to-your-invoice",
+                  "home/account-admin/account-overview/refunds",
+                  "account-admin/account-overview/cancel-my-account",
+                  "home/account-admin/account-overview/cancel-a-former-employees-subscription",
+                  "account-admin/account-overview/delete-my-account"
+                ]
+              },
+              {
+                "group": "Workspaces",
+                "pages": [
+                  "account-admin/workspaces/reactivating-a-canceled-workspace",
+                  "home/account-admin/workspaces/delete-a-workspace",
+                  "home/account-admin/workspaces/transfer-workspace-ownership",
+                  "account-admin/workspaces/workspace-faqs"
+                ]
+              }
             ]
           }
         ]
