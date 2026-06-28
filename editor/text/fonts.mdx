@@ -9,7 +9,7 @@ Select a font in the inspector as part of a Text Style. The default list is popu
 Font variables and OpenType features can be found in the options fly-out of the Text Styles subsection. If supported by the font, you can find it alongside the font weight dropdown.
 
 <Info>
-  Font variables can be animated. Open the options fly-out in animate mode to add keys.
+  Font variables can be animated. Open the options fly-out in [animate mode](/editor/fundamentals/design-vs-animate-mode) to add keys.
 </Info>
 
 <Info>
@@ -61,6 +61,18 @@ Select the font in the **Assets** panel and change the **Type** option to define
 <Note>
   Hosted fonts are available on Voyager and Enterprise plans. [Learn more about our plans and pricing](https://rive.app/pricing?utm_source=docs&utm_medium=content).
 </Note>
+
+---
+
+### Export Behavior
+
+In addition to **Type**, each font has an export **Behavior** that controls whether the font is included in the exported .riv file. Select the font in the Assets panel to find this option in the Inspector.
+
+![Font export Behavior options in the Inspector](/images/editor/text/text-runs-fonts-behavior.png)
+
+- **Automatic:** Includes the font in the export if a text run uses it somewhere in the file. For fonts contained within a library, the default behavior is inherited from the source file.
+- **Force Export:** Export the font regardless of whether or not it's referenced within the file.
+- **Prevent Export:** Don't include the font in the export, regardless of whether or not it's referenced within the file.
 
 ---
 

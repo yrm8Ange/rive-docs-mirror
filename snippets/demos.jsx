@@ -6,9 +6,20 @@ export const Demos = ({
   // For custom cards
   children,
   // where in the list do you want to put the custom children
-  childrenIndex = 0
+  childrenIndex = 0,
+  // Override the title and description, say "Learn by Example" instead
+  learnByExample = false
 }) => {
   const examplesData = {
+    ikConstraint: {
+      title: 'IK Constraints',
+      description: 'Check out this example to see IK constraints in action.',
+      image: "https://static.rive.app/docs/ik-constraint.gif",
+      stateMachines: "State Machine 1",
+      links: {
+        editor: "https://rive.app/community/files/28080-53039-ik-constraint/",
+      }
+    },
     cachingARiveFile: {
       title: 'Caching a Rive File',
       description: 'Load the .riv into memory once, use it multiple times.',
@@ -176,6 +187,15 @@ export const Demos = ({
         editor: "https://rive.app/community/files/25826-masonry-layout/"
       }
     },
+    scriptingParticleEmitter: {
+      title: "Particle Emitter",
+      riv: "https://static.rive.app/rivs/particle-demo.riv",
+      artboard: "Demo",
+      description: "A small, self contained particle system for Rive node and layout scripts.",
+      links: {
+        editor: "https://rive.app/community/files/28062-53012-particle-librar/"
+      }
+    },
     scriptingTippingConverter: {
       title: "Custom Converter",
       image: "https://static.rive.app/docs/tipping-scripting-converter.gif",
@@ -263,6 +283,14 @@ export const Demos = ({
       links: {
         editor: "https://rive.app/marketplace/25772-blinko-scripted-game/"
       },
+    },
+    constraints: {
+      title: "Constraints",
+      image: "https://static.rive.app/docs/constraints.gif",
+      description: "Transform, Translate, Scale, and Rotation Constraints.",
+      links: {
+        editor: "https://rive.app/community/files/28081-53040-constraints/"
+      },
     }
   }
 
@@ -316,6 +344,7 @@ export const Demos = ({
             stateMachines,
             canvas,
             artboard,
+            autoBind: true,
             autoplay: true,
             Layout: new rive.Layout({
               fit: rive.Fit.Layout,
@@ -446,30 +475,34 @@ export const Demos = ({
               </div>
               <div className="flex flex-grow flex-col px-6 py-5 relative" data-component-part="card-content-container">
                 <div className="flex flex-col grow">
-                  <h2 className="not-prose font-semibold text-base text-gray-800 dark:text-white" data-component-part="card-title">{ title }</h2>
+                  <h2 className="not-prose font-semibold text-base text-gray-800 dark:text-white" data-component-part="card-title">{ learnByExample ? "Learn by Example" : title }</h2>
 
                   <div className="flex flex-col grow prose mt-1 font-normal text-sm leading-6 text-gray-600 dark:text-gray-400" data-component-part="card-content">
                     <div className="grow flex flex-col">
-                        <p>{description}</p>
-                        {
-                          source && source.length > 0 && (
-                            <p className="mt-3">
-                              {
-                                source.map((item, index) => {
-                                  if (source.length == 1) {
-                                    return <>Open the <a  href={item}>Rive file</a>.</>
-                                  }
-
-                                  if (index == 0) {
-                                    return <>Open <a  href={item}>Rive file 1</a></>
-                                  }
-
-                                  return <>, <a href={item}>file {index + 1}</a></>
-                                })
-                              }
-                            </p>
+                      {
+                        description && !learnByExample && (
+                            <p>{description}</p>
                           )
-                        }
+                      }
+                      {
+                        source && source.length > 0 && (
+                          <p className="mt-3">
+                            {
+                              source.map((item, index) => {
+                                if (source.length == 1) {
+                                  return <>Open the <a  href={item}>Rive file</a>.</>
+                                }
+
+                                if (index == 0) {
+                                  return <>Open <a  href={item}>Rive file 1</a></>
+                                }
+
+                                return <>, <a href={item}>file {index + 1}</a></>
+                              })
+                            }
+                          </p>
+                        )
+                      }
                     </div>
                     {
 
