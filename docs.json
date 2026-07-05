@@ -16,6 +16,19 @@
       "claude"
     ]
   },
+  "variables": {
+    "runtimeCurrentNameApple": "New Runtime",
+    "runtimeLegacyNameApple": "Legacy Runtime",
+    "monthlyCreditsVoyager": "$20",
+    "monthlyCreditsEnterprise": "$40",
+    "pricingCadetMonthly": "$17",
+    "pricingCadetYearly": "$108",
+    "pricingVoyagerMonthly": "$39",
+    "pricingVoyagerYearly": "$304",
+    "pricingEnterpriseYearly": "$1,440",
+    "versionMajorWebGL2": "2",
+    "versionWebGL2": "2.38.3"
+  },
   "navigation": {
     "tabs": [
       {
@@ -86,8 +99,7 @@
                       "editor/text/text-overview",
                       "editor/text/text-runs",
                       "editor/text/text-styles",
-                      "editor/text/text-modifiers",
-                      "editor/text/fonts"
+                      "editor/text/text-modifiers"
                     ]
                   },
                   {
@@ -117,7 +129,11 @@
               {
                 "group": "Assets",
                 "pages": [
-                  "editor/fundamentals/importing-assets",
+                  "editor/fundamentals/assets-overview",
+                  "editor/assets/svg",
+                  "editor/assets/psd",
+                  "editor/text/fonts",
+                  "editor/assets/audio",
                   "editor/libraries"
                 ]
               },
@@ -139,8 +155,7 @@
                       "editor/state-machine/state-machine",
                       "editor/state-machine/states",
                       "editor/state-machine/transitions",
-                      "editor/state-machine/layers",
-                      "editor/animate-mode/animation-mixing"
+                      "editor/state-machine/layers"
                     ]
                   },
                   "editor/state-machine/listeners",
@@ -226,7 +241,8 @@
               {
                 "group": "Accessibility",
                 "pages": [
-                  "editor/accessibility/semantics"
+                  "editor/accessibility/semantics",
+                  "editor/accessibility/reduced-motion"
                 ]
               },
               "account-admin/bring-your-own-bucket",
@@ -642,6 +658,7 @@
                   "runtimes/apple/loading-assets",
                   "runtimes/apple/fonts",
                   "runtimes/apple/caching-a-rive-file",
+                  "runtimes/apple/semantics",
                   "runtimes/apple/playing-audio",
                   "runtimes/apple/logging",
                   {
@@ -1228,6 +1245,14 @@
     {
       "source": "/editor/fundamentals/selecting-and-navigating-groups",
       "destination": "/editor/interface-overview/selection-and-navigation"
+    },
+    {
+      "source": "/editor/fundamentals/importing-assets",
+      "destination": "/editor/fundamentals/assets-overview"
+    },
+    {
+      "source": "/editor/animate-mode/animation-mixing",
+      "destination": "/editor/state-machine/states#blend-states"
     },
     {
       "source": "/home/account-admin/workspaces/workspace-status",

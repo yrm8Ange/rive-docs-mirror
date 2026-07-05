@@ -11,6 +11,24 @@ export const Demos = ({
   learnByExample = false
 }) => {
   const examplesData = {
+    accessibilityReducedMotion: {
+      title: 'Reduced Motion Example',
+      description: 'Strategies for respecting a user\'s reduced motion preferences.',
+      riv: 'https://static.rive.app/rivs/accessibility_reduced_motion.riv',
+      stateMachines: "State Machine 1",
+      links: {
+        editor: "https://rive.app/community/files/28077-53052-accessibility-reduced-motion"
+      },
+    },
+    randomizeExit: {
+      title: 'Randomize Exit',
+      description: 'Randomize Exit lets a state choose from its outgoing transition paths at random.',
+      riv: 'https://static.rive.app/rivs/randomize_exit.riv',
+      stateMachines: "State Machine 1",
+      links: {
+        editor: "https://rive.app/community/files/28147-53157-randomize-exit/"
+      },
+    },
     ikConstraint: {
       title: 'IK Constraints',
       description: 'Check out this example to see IK constraints in action.',
@@ -19,6 +37,15 @@ export const Demos = ({
       links: {
         editor: "https://rive.app/community/files/28080-53039-ik-constraint/",
       }
+    },
+    accessibilityReducedMotion: {
+      title: 'Reduced Motion Example',
+      description: 'Strategies for respecting a user\'s reduced motion preferences.',
+      riv: 'https://static.rive.app/rivs/accessibility_reduced_motion.riv',
+      stateMachines: "State Machine 1",
+      links: {
+        editor: "https://rive.app/community/files/28077-53052-accessibility-reduced-motion"
+      },
     },
     cachingARiveFile: {
       title: 'Caching a Rive File',
