@@ -189,7 +189,6 @@
                   "editor/manipulating-shapes/manipulating-shapes",
                   "editor/manipulating-shapes/meshes",
                   "editor/manipulating-shapes/bones",
-                  "editor/manipulating-shapes/bone-tips",
                   "editor/manipulating-shapes/joysticks",
                   {
                     "group": "Constraints",
@@ -440,6 +439,7 @@
                 "group": "Image",
                 "pages": [
                   "scripting/api-reference/image/image",
+                  "scripting/api-reference/image/font",
                   "scripting/api-reference/image/image-filter",
                   "scripting/api-reference/image/image-sampler",
                   "scripting/api-reference/image/image-wrap"
@@ -1266,6 +1266,10 @@
     {
       "source": "/editor/animate-mode/animation-mixing",
       "destination": "/editor/state-machine/states#blend-states"
+    },
+    {
+      "source": "editor/manipulating-shapes/bone-tips",
+      "destination": "editor/manipulating-shapes/bones"
     },
     {
       "source": "/home/account-admin/workspaces/workspace-status",
