@@ -133,12 +133,12 @@
                       "editor/layouts/layouts-overview",
                       "editor/layouts/layout-tools",
                       "editor/layouts/layout-parameters",
-                      "editor/layouts/layout-styles",
+                      "editor/layouts/component-sizing",
                       "editor/layouts/layout-animation",
-                      "editor/layouts/n-slicing",
-                      "editor/layouts/scrolling"
+                      "editor/layouts/n-slicing"
                     ]
-                  }
+                  },
+                  "editor/design/rulers-and-guides"
                 ]
               },
               {
@@ -232,9 +232,9 @@
                 "group": "Publishing",
                 "pages": [
                   "editor/exporting/exporting-for-runtime",
+                  "editor/embed-urls/overview",
                   "editor/exporting/exporting-for-video-and-static-design",
-                  "editor/exporting/exporting-for-backup",
-                  "editor/embed-urls/overview"
+                  "editor/exporting/exporting-for-backup"
                 ]
               },
               {
@@ -1271,12 +1271,20 @@
       "destination": "/editor/state-machine/states#blend-states"
     },
     {
-      "source": "editor/manipulating-shapes/bone-tips",
-      "destination": "editor/manipulating-shapes/bones"
+      "source": "/editor/manipulating-shapes/bone-tips",
+      "destination": "/editor/manipulating-shapes/bones"
+    },
+    {
+      "source": "/editor/layouts/scrolling",
+      "destination": "/editor/constraints/scroll-constraint"
     },
     {
       "source": "/home/account-admin/workspaces/workspace-status",
       "destination": "/account-admin/workspaces/managing-workspaces"
+    },
+    {
+      "source": "/editor/layouts/layout-styles",
+      "destination": "/editor/layouts/layout-parameters#styles"
     }
   ],
   "integrations": {
