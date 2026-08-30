@@ -53,6 +53,7 @@ export const FeatureSupportGroup = ({
     ]
 
     const featuresInOrder = [
+        "gpuCanvas",
         "globalViewModels",
         "dataBindingFonts",
         "semantics",
@@ -84,6 +85,27 @@ export const FeatureSupportGroup = ({
     ]
 
     const features = {
+        gpuCanvas: {
+            title: "GPU Canvas",
+            runtimes: {
+                webCanvas: { supported: false, description: "Coming soon" },
+                webCanvasLite: { supported: false, description: "NA" },
+                webWebGL: { supported: false, description: "Not supported" },
+                webWebGL2: { supported: false, description: "Coming soon" },
+                reactCanvas: { supported: false, description: "Coming soon" },
+                reactCanvasLite: { supported: false, description: "NA" },
+                reactWebGL: { supported: false, description: "Not supported" },
+                reactWebGL2: { supported: false, description: "Coming soon" },
+                reactNative: { supported: false, description: "Coming soon" },
+                reactNativeLegacy: { supported: false, description: "Not supported" },
+                flutter: { supported: true, version: "0.15.0-dev.1" },
+                apple: { supported: true, version: "v6.25.0" },
+                android: { supported: false, description: "Coming soon" },
+                cpp: { supported: true, description: "Supported" },
+                unity: { supported: false, description: "Coming soon" },
+                unreal: { supported: false, description: "Coming soon" }
+            }
+        },
         globalViewModels: {
             title: "Global View Models",
             runtimes: {
@@ -101,7 +123,7 @@ export const FeatureSupportGroup = ({
                 apple: { supported: false, description: "Coming soon" },
                 android: { supported: false, description: "Coming soon" },
                 cpp: { supported: true, description: "Supported" },
-                unity: { supported: false, description: "Coming soon" },
+                unity: { supported: true, version: "v0.4.5-canary.34+" },
                 unreal: { supported: false, description: "Coming soon" }
             }
         },
@@ -122,7 +144,7 @@ export const FeatureSupportGroup = ({
                 apple: { supported: false, description: "Coming soon" },
                 android: { supported: false, description: "Coming soon" },
                 cpp: { supported: true, description: "Supported" },
-                unity: { supported: false, description: "Coming soon" },
+                unity: { supported: true, version: "v0.4.5-canary.36+" },
                 unreal: { supported: false, description: "Coming soon" }
             }
         },
