@@ -581,7 +581,13 @@
               "feature-support",
               "runtimes/runtime-sizes",
               "runtimes/choose-a-renderer/overview",
-              "runtimes/advanced-topic/format"
+              {
+                "group": "File formats",
+                "pages": [
+                  "runtimes/advanced-topic/format",
+                  "runtimes/advanced-topic/rml"
+                ]
+              }
             ]
           },
           {
@@ -600,6 +606,7 @@
                   "runtimes/web/loading-assets",
                   "runtimes/web/fonts",
                   "runtimes/web/semantics",
+                  "runtimes/web/gpu-canvas",
                   "runtimes/web/preloading-wasm",
                   "runtimes/web/caching-a-rive-file",
                   "runtimes/web/playing-audio",
@@ -629,6 +636,7 @@
                   "runtimes/react/loading-assets",
                   "runtimes/react/fonts",
                   "runtimes/react/semantics",
+                  "runtimes/react/gpu-canvas",
                   "runtimes/react/preloading-wasm",
                   "runtimes/react/caching-a-rive-file",
                   "runtimes/react/playing-audio",
@@ -837,6 +845,27 @@
             "pages": [
               "integrations/overview",
               "integrations/html-embed"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "CLI",
+        "groups": [
+          {
+            "group": " ",
+            "pages": [
+              "cli/overview",
+              "cli/getting-started",
+              "cli/agents",
+              "cli/examples"
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": [
+              "cli/reference/commands",
+              "cli/reference/project-config"
             ]
           }
         ]
