@@ -262,6 +262,27 @@ end
 ```
 
 
+### `font`
+
+{/* function font(self, name: string): Font? */}
+<div class="signature">
+```lua
+font(name: string) -> Font?
+```
+</div>
+
+Returns a [Font](/scripting/api-reference/text/font) asset by name, or nil if not found.
+```lua highlight={2}
+function init(self: Label, context: Context): boolean
+    local font = context:font('Inter')
+    if font then
+        self.text:append('Hello', { font = font, size = 24, paint = self.paint })
+    end
+    return true
+end
+```
+
+
 ### `audio`
 
 {/* function audio(self, name: string): AudioSource? */}
@@ -324,6 +345,8 @@ layout scripts that don't know their size at init. Call
 `beginFrame()` raises an error pointing to `resize()`. Check
 `canvas.width > 0` to gate work.
 
+`clearColor` is ignored here; pass it to `beginFrame` instead.
+
 
 ### `gpuCanvas`
 
@@ -349,6 +372,23 @@ layout scripts that don't know their size at init. Call
 `canvas:resize(w, h)` once the real size is known. While deferred,
 `width`/`height` report 0 and calling `colorView()` raises an error
 pointing to `resize()`. Check `canvas.width > 0` to gate work.
+
+
+### `gpuTarget`
+
+{/* function gpuTarget(self): GPUTarget? */}
+<div class="signature">
+```lua
+gpuTarget() -> GPUTarget?
+```
+</div>
+
+Rive's render target: passes into it land under all of Rive's
+content. It cannot be sampled and starts each frame undefined, so the
+first pass must clear or cover it. With a sampleCount of 1 it can
+resolve a script's MSAA texture. On a frame the host hides it, `view`
+is nil and passes into it drop. Nil where the host can never expose
+one; keep a `gpuCanvas` and draw its image instead.
 
 
 ### `features`
